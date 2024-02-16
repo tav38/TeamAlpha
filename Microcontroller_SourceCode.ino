@@ -1,5 +1,6 @@
 /*
   Blink
+Member Name:
 
   Turns an LED on for one second, then off for one second, repeatedly.
 
@@ -43,3 +44,4 @@ void loop() {
   }                  // wait for a second
 
 }
+//Member: Tanvi Verma
