@@ -17,6 +17,8 @@ void loop()
  
 //if a value higher than 500 is registered, we will print the following
 //this is done so that we can clearly see if the threshold is met
+
+ //Note: 500 was around me talking next to it, might need to be higher if there is background noise
   if (soundValue > 500) { 
     Serial.println("         ||        ");
     Serial.println("       ||||||      ");
