@@ -10,7 +10,7 @@ for i in range(num2win):
         Read Guard Coming Command
         activate microphone
         indicate microphone about to turn on
-        
+            
         #Give user time to process command
         while time_for_command:
             if Crack the Code/Sneak Around triggered:
