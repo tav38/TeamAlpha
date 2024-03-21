@@ -11,6 +11,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 RotaryEncoder encoder(Rotary_A,Rotary_B, RotaryEncoder::LatchMode::TWO03);
+int game delay;
 
 void setup() {
   // put your setup code here, to run once:
@@ -26,7 +27,7 @@ void setup() {
   //pins for 
   pinMode(KeyPad_OUT,OUTPUT);
   pinMode(KeyPad_In,INPUT);
-  int game_delay = 10000;
+  game_delay = 10000;
   bool Round_Sucess = 0;
   //pin code we will add later
 }
