@@ -19,7 +19,7 @@ void setup() {
 
 void loop() {
   sucess = 0;
-    lcd.clear();
+  lcd.clear();
     int rot_code = int(random(0,100));
     String rotcodes = String(rot_code);
     String placeholder = "Combo 1 : " + rotcodes;
