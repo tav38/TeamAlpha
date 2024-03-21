@@ -26,12 +26,13 @@ void setup() {
   //pins for 
   pinMode(KeyPad_OUT,OUTPUT);
   pinMode(KeyPad_In,INPUT);
-  int game_delay = 5000;
+  int game_delay = 10000;
   bool Round_Sucess = 0;
   //pin code we will add later
 }
 
 void loop() {
+  Round_Sucess = 0;
   // put your main code here, to run repeatedly:
   lcd.print("Welcome, Lets Begin....")
   action = rand(0,2)
@@ -63,28 +64,50 @@ void loop() {
         lcd.display("Guard Avoided!");
       }
 
-    ///DIAL
+    ///TURN THE DIAL
     case 1:
-    int rot_code = rand(0,100) //value MAY BE WRONG
-    lcd.print("Lock Combo 1 : ",rot_code)
-    delay(game_delay)
-    rot_pos = encoder.getPosition();
-    //if negative, flip to posotive cvalue
-    if(rot_pos < 0){
-      rot_pos = 100 - rot_pos //SUBTRACTION VAL
-    }
-    
-    if(rot_pos == rot_code){
-      Round_Sucess = 1;
-      lcd.display("Code Cracked")
-    }
-    else{
-      Round_Sucess = 0;
-      lcd.display("Womp Womp :(")
+      //start sequence
+      lcd.clear();
+      //generate random number
+      int rot_code = int(random(0,100));
+      //turn into string and display
+      String rotcodes = String(rot_code);
+      String placeholder = "Find : " + rotcodes;
+      lcd.print(placeholder);
+      //wait some amount of time so it displays
       delay(1000);
-     
-    }
-  
+      //start timer
+      unsigned long startTime = millis();
+      //internal number rotation number
+      int temp_rot = 0;
+      //while loop to read encoder
+      while (millis() - startTime < game_delay) { // 10-second timeout
+          encoder.tick();
+          int rot_pos = encoder.getPosition();
+        //round win 
+        if(rot_pos == rot_code){
+            lcd.clear();
+            lcd.print("Code Cracked");
+            delay(5000);
+            Round_Sucesss = 1
+            break;
+            }
+        //new number fo
+        else if(temp_rot != rot_pos) {
+          lcd.clear();   
+          lcd.print("pos:");
+          String poss = String(rot_pos); 
+          lcd.print(poss);
+          temp_rot = rot_pos;
+        }
+      }
+      //Round Loss
+      if(Round_Sucess == 0){
+        lcd.clear();
+        lcd.print("Womp Womp");
+        delay(5000);
+        }  
+    
     case(2):
     digitalWrite(KeyPad_OUT,1);
     delay(100);
