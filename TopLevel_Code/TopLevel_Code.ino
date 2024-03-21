@@ -49,7 +49,9 @@ void loop() {
     ///GUARD IS COMING 
     case 0:
       int soundValue = 0; //create variable to store many different readings
-      for (int i = 0; i < 32; i++) //create a for loop to read 
+       unsigned long startTime = millis();
+      //while loop to read encoder
+      while (millis() - startTime < game_delay) { // 10-second timeout
       { soundValue += analogRead(sound_sensor);  } //read the sound sensor
 
       soundValue >>= 5; //bitshift operation 
@@ -122,9 +124,12 @@ void loop() {
   delay = delay - 50;
 
   if(Round_Sucess == 0){
+    lcd.clear();
     lcd.print("GAME OVER");
     delay(2000);
-    lcd.print("SCORE :",curround);
+    String currround_string = String(curround);
+    string disp = "SCORE : " + currround_string;
+    lcd.print(disp);
     delay(10000);
     break;
   }
@@ -132,9 +137,12 @@ void loop() {
   if(curround == num2win)
   {
     while(1){
+    lcd.clear();
     lcd.print("WINNER");
     delay(2000);
-    lcd.print("SCORE :",curround);
+    String currround_string = String(curround);
+    string disp = "SCORE : " + currround_string;
+    lcd.print(disp);
     }
 
   }
