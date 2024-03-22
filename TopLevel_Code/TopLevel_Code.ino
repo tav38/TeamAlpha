@@ -110,7 +110,7 @@ void loop() {
         lcd.print("Womp Womp");
         delay(5000);
         }  
-    
+    //Crack the Code
     case(2):
     digitalWrite(KeyPad_OUT,1);
     delay(100);
