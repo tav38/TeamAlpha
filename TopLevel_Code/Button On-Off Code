@@ -5,9 +5,15 @@ const int buttonPin = 2; // Button is connected to digital pin 2
 int buttonState = 0;     // Variable to store the current state of the button
 bool isDisplayOn = false;  // Variable to track whether the display is currently on or off
 
+int sound_sensor = A0;
+int soundValue = 0;
+int button = 0;
+
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
 void setup() {
+  Serial.begin(9600);
+
   lcd.begin(16,2);
   lcd.clear();
   //lcd.print("Team Alpha!");
@@ -30,9 +36,28 @@ void loop() {
       // Display "Team Alpha!" on the LCD
       lcd.clear();
       lcd.print("LET'S ROBIT!");
-    } else {
+      delay(5000);
+      lcd.clear();
+      lcd.print("SHHH GUARDS COMING!");
+      delay(2000);
+      //soundValue = 0; //create variable to store many different readings
+      soundValue = analogRead(sound_sensor);   
+    if (soundValue > 350) { 
+      lcd.clear();
+      lcd.print("Round failed!");
+      }
+
+    
+  
+    else {
       // Clear the LCD
       lcd.clear();
+      lcd.print("no sound sensed");
+      
+       }
+    delay(5000);
+    lcd.clear();
+    lcd.print("Done!");
     }
   }
 
