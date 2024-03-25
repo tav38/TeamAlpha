@@ -14,7 +14,12 @@ bool Round_Sucess = 0;
 int action = 0;
 int curround = 0;
 int num2win = 99;
-int sound_sensor = A0; //assign to pin A0
+const int buttonPin = 2; // Button is connected to digital pin 2
+int buttonState = 0;     // Variable to store the current state of the button
+bool isDisplayOn = false;  // Variable to track whether the display is currently on or off
+int sound_sensor = A0;
+int soundValue = 0;
+int button = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,7 +27,7 @@ void setup() {
   lcd.begin(16,2);
   lcd.clear();
   //pin for noise sensor
-
+  pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 10000;
  
@@ -30,37 +35,41 @@ void setup() {
 }
 
 void loop() {
-  Round_Sucess = 0;
-  // put your main code here, to run repeatedly:
-  lcd.print("Welcome, Lets Begin....");
-  action = random(0,2);
+  buttonState = digitalRead(buttonPin);
+  // Check if the button is pressed
+  while(buttonState == HIGH) {
+    Round_Sucess = 0;
+    // put your main code here, to run repeatedly:
+    lcd.print("Welcome, Lets Begin....");
+    action = random(0,2);
 
-  //initalizations for rotary encoder
-  static int rot_pos = 0;
-  //make delay between actions smaller every time
-  //in ms
-  delay(game_delay);
+    //initalizations for rotary encoder
+    static int rot_pos = 0;
+    //make delay between actions smaller every time
+    //in ms
+    delay(game_delay);
 
-  switch(action){
+    switch(action){
 
     ///GUARD IS COMING 
     case 0:
       int soundValue = 0; //create variable to store many different readings
-       unsigned long startTime = millis();
-      //while loop to read encoder
-      while (millis() - startTime < game_delay) { // 10-second timeout
-      { soundValue += analogRead(sound_sensor);  } //read the sound sensor
+      lcd.clear();
+      lcd.print("SHHH GUARDS COMING!");
 
-      soundValue >>= 5; //bitshift operation 
-      
-      if(soundValue > 500){
-         Round_Sucess = 0;
-        lcd.print("Womp Womp :(");
-        delay(1000);
-      }
+      delay(game_delay);
+      //soundValue = 0; //create variable to store many different readings
+      soundValue = analogRead(sound_sensor);   
+    if (soundValue > 350) { 
+      lcd.clear();
+      Round_Sucess = 0;
+      lcd.print("Womp Womp :(");
+      delay(game_delay);
+    }
       else{
-        Round_Sucess = 1;
-        lcd.print("Guard Avoided!");
+      Round_Sucess = 1;
+      lcd.print("Guard Avoided!");
+      delay(game_delay);
       }
 
     ///TURN THE DIAL
@@ -108,9 +117,9 @@ void loop() {
         }  
     
     case(2):
-    //Round_Sucess = digitalRead(KeyPad_In);
+    Round_Sucess = 1;
   
-
+    }
   game_delay = game_delay - 50;
 
   if(Round_Sucess == 0){
@@ -124,19 +133,18 @@ void loop() {
     break;
   }
 
-  if(curround == num2win)
-  {
-    while(1){
-    lcd.clear();
-    lcd.print("WINNER");
-    delay(2000);
-    String currround_string = String(curround);
-    String disp = "SCORE : " + currround_string;
-    lcd.print(disp);
+    if(curround == num2win)
+    {
+      while(1){
+      lcd.clear();
+      lcd.print("WINNER");
+      delay(2000);
+      String currround_string = String(curround);
+      String disp = "SCORE : " + currround_string;
+      lcd.print(disp);
+      }
     }
-
-  }
-  }
+  
   }
 }
 
