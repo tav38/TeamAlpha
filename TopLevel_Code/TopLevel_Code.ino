@@ -5,45 +5,41 @@
 
 #define Rotary_A A2
 #define Rotary_B A3
-#define KeyPad_OUT D1
-#define KeyPad_In D2
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 RotaryEncoder encoder(Rotary_A,Rotary_B, RotaryEncoder::LatchMode::TWO03);
-int game delay;
+int game_delay = 0;
+bool Round_Sucess = 0;
+int action = 0;
+int curround = 0;
+int num2win = 99;
+int sound_sensor = A0; //assign to pin A0
 
 void setup() {
   // put your setup code here, to run once:
-  int num2win = 99;
-  int action = ;
-  int curround = 0;
+ 
   lcd.begin(16,2);
   lcd.clear();
-  //analog pins for rotary encoder
- 
   //pin for noise sensor
-  int sound_sensor = A0; //assign to pin A0
+
   //pins for 
-  pinMode(KeyPad_OUT,OUTPUT);
-  pinMode(KeyPad_In,INPUT);
   game_delay = 10000;
-  bool Round_Sucess = 0;
+ 
   //pin code we will add later
 }
 
 void loop() {
   Round_Sucess = 0;
   // put your main code here, to run repeatedly:
-  lcd.print("Welcome, Lets Begin....")
-  action = rand(0,2)
+  lcd.print("Welcome, Lets Begin....");
+  action = random(0,2);
 
   //initalizations for rotary encoder
   static int rot_pos = 0;
-  encoder.tick();
   //make delay between actions smaller every time
   //in ms
-  delay(game_delay)
+  delay(game_delay);
 
   switch(action){
 
@@ -59,12 +55,12 @@ void loop() {
       
       if(soundValue > 500){
          Round_Sucess = 0;
-        lcd.display("Womp Womp :(")
+        lcd.print("Womp Womp :(");
         delay(1000);
       }
       else{
         Round_Sucess = 1;
-        lcd.display("Guard Avoided!");
+        lcd.print("Guard Avoided!");
       }
 
     ///TURN THE DIAL
@@ -92,7 +88,7 @@ void loop() {
             lcd.clear();
             lcd.print("Code Cracked");
             delay(5000);
-            Round_Sucesss = 1
+            Round_Sucess = 1;
             break;
             }
         //new number fo
@@ -112,24 +108,17 @@ void loop() {
         }  
     
     case(2):
-    digitalWrite(KeyPad_OUT,1);
-    delay(100);
-    pinMode(KeyPad_OUT,OUTPUT);
-    while(digitalRead(KeyPad_OUT)!= 1){
-      //deadloop
-      //waiting for game to end
-    }
-    Round_Sucess = digitalRead(KeyPad_In);
-  }
+    //Round_Sucess = digitalRead(KeyPad_In);
+  
 
-  delay = delay - 50;
+  game_delay = game_delay - 50;
 
   if(Round_Sucess == 0){
     lcd.clear();
     lcd.print("GAME OVER");
     delay(2000);
     String currround_string = String(curround);
-    string disp = "SCORE : " + currround_string;
+    String disp = "SCORE : " + currround_string;
     lcd.print(disp);
     delay(10000);
     break;
@@ -142,12 +131,12 @@ void loop() {
     lcd.print("WINNER");
     delay(2000);
     String currround_string = String(curround);
-    string disp = "SCORE : " + currround_string;
+    String disp = "SCORE : " + currround_string;
     lcd.print(disp);
     }
 
   }
   }
-
-
+  }
 }
+
