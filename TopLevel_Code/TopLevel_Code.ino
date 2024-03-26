@@ -5,8 +5,8 @@
 
 #define Rotary_A A2
 #define Rotary_B A3
-#define FullGame_Out 10
-#define FullGame_In_In 11
+#define MainGame_Out 10
+#define MainGame_In 11
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -31,51 +31,53 @@ void setup() {
   //pin for noise sensor
   pinMode(buttonPin, INPUT);
   //pins for 
-  game_delay = 10000;
+  game_delay = 5000;
  
   //pin code we will add later
 }
 
 void loop() {
-  buttonState = digitalRead(buttonPin);
+  //buttonState = digitalRead(buttonPin);
   // Check if the button is pressed
-  while(buttonState == HIGH) {
-    Round_Sucess = 0;
+  //while(buttonState == HIGH) {
+    Round_Sucess = 1;
     // put your main code here, to run repeatedly:
-    lcd.print("Welcome, Lets Begin....");
-    action = random(0,2);
+    lcd.clear();
+    lcd.print("Lets RobIT!");
+    static int rot_pos = 0;
+    
+  
+    while(Round_Sucess == 1 & curround < num2win){
+    action = int(random(0,3));
 
     //initalizations for rotary encoder
-    static int rot_pos = 0;
+    
     //make delay between actions smaller every time
     //in ms
     delay(game_delay);
-
-    switch(action){
-
-    ///GUARD IS COMING 
-    case 0:
+    if(action == 0){
       int soundValue = 0; //create variable to store many different readings
       lcd.clear();
-      lcd.print("SHHH GUARDS COMING!");
-
+      lcd.print("GUARDS COMING!");
       delay(game_delay);
       //soundValue = 0; //create variable to store many different readings
       soundValue = analogRead(sound_sensor);   
-    if (soundValue > 350) { 
-      lcd.clear();
-      Round_Sucess = 0;
-      lcd.print("Womp Womp :(");
-      delay(game_delay);
-    }
+      if (soundValue > 350) { 
+        lcd.clear();
+        Round_Sucess = 0;
+        lcd.print("Womp Womp :(");
+        delay(3000);
+      }
       else{
       Round_Sucess = 1;
+      lcd.clear();
       lcd.print("Guard Avoided!");
-      delay(game_delay);
+      delay(3000);
       }
+    }
 
     ///TURN THE DIAL
-    case 1:
+    else if(action == 1){
       //start sequence
       lcd.clear();
       //generate random number
@@ -98,7 +100,7 @@ void loop() {
         if(rot_pos == rot_code){
             lcd.clear();
             lcd.print("Code Cracked");
-            delay(5000);
+            delay(3000);
             Round_Sucess = 1;
             break;
             }
@@ -115,32 +117,39 @@ void loop() {
       if(Round_Sucess == 0){
         lcd.clear();
         lcd.print("Womp Womp");
-        delay(5000);
+        delay(3000);
         }  
-    
-    case(2):
+    }      
+    else if(action == 2){
+    lcd.clear();
+    lcd.print("You are here");
+    delay(10000);
     pinMode(MainGame_Out,OUTPUT);
     digitalWrite(MainGame_Out,1);
-    pinMode(MainGame_Out,Input);
+    pinMode(MainGame_Out,INPUT);
       while(digitalRead(MainGame_Out) == 1 ){
         int i = 0;                  
     }        
-    Round_Sucess = digitalRead(MainGame_In);
+    Round_Sucess = 1;//digitalRead(MainGame_In);
     }
+  
   game_delay = game_delay - 50;
+  curround++;
+  } 
 
   if(Round_Sucess == 0){
     lcd.clear();
     lcd.print("GAME OVER");
-    delay(2000);
+    delay(5000);
     String currround_string = String(curround);
     String disp = "SCORE : " + currround_string;
+    lcd.clear();
     lcd.print(disp);
     delay(10000);
-    break;
+    lcd.clear();
+    //break;
   }
-
-    if(curround == num2win)
+  if(curround == num2win)
     {
       while(1){
       lcd.clear();
@@ -148,10 +157,11 @@ void loop() {
       delay(2000);
       String currround_string = String(curround);
       String disp = "SCORE : " + currround_string;
+      lcd.clear();
       lcd.print(disp);
+      delay(10000);
       }
     }
   
-  }
+  //}
 }
-
