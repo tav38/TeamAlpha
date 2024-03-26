@@ -5,6 +5,8 @@
 
 #define Rotary_A A2
 #define Rotary_B A3
+#define FullGame_Out 10
+#define FullGame_In_In 11
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -117,8 +119,13 @@ void loop() {
         }  
     
     case(2):
-    Round_Sucess = 1;
-  
+    pinMode(MainGame_Out,OUTPUT);
+    digitalWrite(MainGame_Out,1);
+    pinMode(MainGame_Out,Input);
+      while(digitalRead(MainGame_Out) == 1 ){
+        int i = 0;                  
+    }        
+    Round_Sucess = digitalRead(MainGame_In);
     }
   game_delay = game_delay - 50;
 
