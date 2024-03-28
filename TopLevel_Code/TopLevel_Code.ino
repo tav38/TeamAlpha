@@ -7,6 +7,7 @@
 #define Rotary_B A3
 #define MainGame_Out 10
 #define MainGame_In 11
+#define Bond_Out 8
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -32,6 +33,7 @@ void setup() {
   pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 5000;
+  pintMode(Bond_Out, 8);
  
   //pin code we will add later
 }
