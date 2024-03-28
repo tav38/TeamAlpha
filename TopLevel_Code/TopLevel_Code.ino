@@ -33,7 +33,7 @@ void setup() {
   pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 5000;
-  pintMode(Bond_Out, 8);
+  pintMode(Bond_Out, OUTPUT);
  
   //pin code we will add later
 }
@@ -46,6 +46,9 @@ void loop() {
     // put your main code here, to run repeatedly:
     lcd.clear();
     lcd.print("Lets RobIT!");
+    digitalWrite(Bond_Out,1);
+    delay(1000);
+    digitalWrite(Bond_Out,0);
     static int rot_pos = 0;
     
   
