@@ -10,6 +10,7 @@
 #include <Keypad.h>
 #define KeyPad_OUT 10
 #define KeyPad_In 11
+#define Bond_In 13
 #include <DFRobotDFPlayerMini.h>
 #include "SoftwareSerial.h"
 
@@ -61,15 +62,15 @@ delay(200);
   
 void loop(){
   
-  if(KeyPad_In == 1){
-    action = random(0,2);
+  if(digitalRead(KeyPad_In) == 1){
     codenum =random(2,7);
     pinMode(KeyPad_In,OUTPUT);
     digitalWrite(KeyPad_In,1);
     Game_Status = 1;
     int num = 0;
+    delay(2000);
      myDFPlayer.play(codenum);
-
+    delay(6000);
     //speaker output
     while(Game_Status == 1){
       //wait for input
@@ -81,8 +82,14 @@ void loop(){
       }
     digitalWrite(KeyPad_OUT,Win_Status);
     digitalWrite(KeyPad_In,0);
+    delay(1000);
     pinMode(KeyPad_In,INPUT);
   }
+  else if(digitalRead(Bond_In) == 1){
+    delay(2000);
+    myDFPlayer.play(codenum);
+    delay(6000);
+    
 }
 
 // Taking care of some special events.
