@@ -51,6 +51,7 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 void setup(){
 pinMode(KeyPad_OUT,OUTPUT);
 pinMode(KeyPad_In,INPUT);
+pinMode(Bond_In,INPUT);
 keypad.addEventListener(keypadEvent);
 mySoftwareSerial.begin(9600);
 myDFPlayer.begin(mySoftwareSerial);
