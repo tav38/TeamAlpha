@@ -63,7 +63,7 @@ void loop(){
   
   if(KeyPad_In == 1){
     action = random(0,2);
-    codenum =random(1,5);
+    codenum =random(2,7);
     pinMode(KeyPad_In,OUTPUT);
     digitalWrite(KeyPad_In,1);
     Game_Status = 1;
@@ -88,21 +88,21 @@ void loop(){
 // Taking care of some special events.
 void keypadEvent(KeypadEvent key){
     switch (codenum) {
-      case 1:
+      case 2:
         if(key == code1[index]){
           Win_Status == 1;
           index++;
         }
         else{Win_Status == 0;
         Game_Status == 0;}
-      case 2:
+      case 3:
         if(key == code2[index]){
           Win_Status == 1;
           index++;
         }
         else{Win_Status == 0;
         Game_Status == 0;}
-      case 3:
+      case 4:
         if(key == code3[index]){
           Win_Status == 1;
           index++;
@@ -110,7 +110,7 @@ void keypadEvent(KeypadEvent key){
         else{Win_Status == 0;
         Game_Status == 0;}
 
-      case 4:
+      case 5:
         if(key == code4[index]){
           Game_Status == 1;
           index++;
@@ -118,7 +118,7 @@ void keypadEvent(KeypadEvent key){
         else{Win_Status == 0;
         Game_Status == 0;}
 
-      case 5:
+      case 6:
         if(key == code5[index]){
           Win_Status == 1;
           index++;
