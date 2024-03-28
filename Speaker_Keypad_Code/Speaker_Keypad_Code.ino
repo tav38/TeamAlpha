@@ -56,7 +56,7 @@ mySoftwareSerial.begin(9600);
 myDFPlayer.begin(mySoftwareSerial);
 myDFPlayer.setTimeOut(5000);
 delay(200);
-myDFPlayer.volume(30);  //Set volume value. From 0 to 30
+myDFPlayer.volume(25);  //Set volume value. From 0 to 30
 delay(200);
 }
   
