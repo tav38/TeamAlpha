@@ -122,10 +122,10 @@ void loop() {
     }      
     else if(action == 2){
     lcd.clear();
-    lcd.print("You are here");
-    delay(10000);
+    lcd.print("You are here");  
     pinMode(MainGame_Out,OUTPUT);
     digitalWrite(MainGame_Out,1);
+    delay(500);
     pinMode(MainGame_Out,INPUT);
       while(digitalRead(MainGame_Out) == 1 ){
         int i = 0;                  
