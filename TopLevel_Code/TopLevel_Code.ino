@@ -5,9 +5,9 @@
 
 #define Rotary_A A2
 #define Rotary_B A3
-#define Start_Crack 10
-#define End_Crack 11
-#define Score_Crack 12
+#define Crack_Start 10
+#define Crack_End 11
+#define Crack_Score 12
 #define Bond_Play 8
 
 
