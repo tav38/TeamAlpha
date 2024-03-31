@@ -33,11 +33,11 @@ void setup() {
   pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 5000;
-  pintMode(Bond_Out, OUTPUT);
+  pinMode(Bond_Out, OUTPUT);
+  pinMode(MainGame_In, INPUT);
  
   //pin code we will add later
 }
-
 void loop() {
   //buttonState = digitalRead(buttonPin);
   // Check if the button is pressed
@@ -54,9 +54,6 @@ void loop() {
   
     while(Round_Sucess == 1 & curround < num2win){
     action = int(random(0,3));
-
-    //initalizations for rotary encoder
-    
     //make delay between actions smaller every time
     //in ms
     delay(game_delay);
@@ -71,13 +68,13 @@ void loop() {
         lcd.clear();
         Round_Sucess = 0;
         lcd.print("Womp Womp :(");
-        delay(3000);
+        delay(game_delay);
       }
       else{
       Round_Sucess = 1;
       lcd.clear();
       lcd.print("Guard Avoided!");
-      delay(3000);
+      delay(game_delay);
       }
     }
 
@@ -122,8 +119,9 @@ void loop() {
       if(Round_Sucess == 0){
         lcd.clear();
         lcd.print("Womp Womp");
-        delay(3000);
+        delay(game_delay);
         }  
+      
     }      
     else if(action == 2){
     lcd.clear();
@@ -135,7 +133,19 @@ void loop() {
       while(digitalRead(MainGame_Out) == 1 ){
         int i = 0;                  
     }        
-    Round_Sucess = 1;//digitalRead(MainGame_In);
+    Round_Sucess = digitalRead(MainGame_In);
+
+    if(Round_Sucess == 0){
+        lcd.clear();
+        lcd.print("Womp Womp");
+        delay(game_delay);
+      }  
+     else{
+      Round_Sucess = 1;
+      lcd.clear();
+      lcd.print("Safe Opened!");
+      delay(game_delay);
+      }
     }
   
   game_delay = game_delay - 50;
