@@ -8,9 +8,10 @@
 || #
 */
 #include <Keypad.h>
-#define KeyPad_OUT 10
-#define KeyPad_In 11
-#define Bond_In 13
+#define Crack_Start 10
+#define Crack_End 11
+#define Crack_Score 12
+#define Bond_Play 13
 #include <DFRobotDFPlayerMini.h>
 #include "SoftwareSerial.h"
 
@@ -49,8 +50,9 @@ int codenum = 0;
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 void setup(){
-pinMode(KeyPad_OUT,OUTPUT);
-pinMode(KeyPad_In,INPUT);
+pinMode(Crack_End,OUTPUT);
+pinMode(Crack_Start,INPUT);
+pinMode(Crack_Score,OUTPUT);
 pinMode(Bond_In,INPUT);
 keypad.addEventListener(keypadEvent);
 mySoftwareSerial.begin(9600);
@@ -62,16 +64,14 @@ delay(200);
 }
   
 void loop(){
-  
-  if(digitalRead(KeyPad_In) == 1){
-    codenum =random(2,7);
-    pinMode(KeyPad_In,OUTPUT);
-    digitalWrite(KeyPad_In,1);
-    digitalWrite(KeyPad_Out,1);
+  digitalWrite(Crack_End,0);
+  if(digitalRead(Crack_Start) == 1){
+    digitalWrite(Crack_End,0);
+    codenum = int(random(2,7));
     Game_Status = 1;
     int num = 0;
     delay(2000);
-     myDFPlayer.play(codenum);
+    myDFPlayer.play(codenum);
     delay(6000);
     //speaker output
     while(Game_Status == 1){
