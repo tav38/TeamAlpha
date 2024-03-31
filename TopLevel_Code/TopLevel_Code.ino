@@ -130,6 +130,7 @@ void loop() {
     lcd.print("Crack the Code");  
     digitalWrite(Crack_Start,1);
     delay(1000);
+    digitalWrite(Crack_Start,0);
     while(digitalRead(Crack_End) == 0 ){
         int i = 0;                  
     }        
