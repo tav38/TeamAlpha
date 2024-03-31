@@ -82,17 +82,14 @@ void loop(){
       else{
       char key = keypad.getKey();}
       }
-    digitalWrite(KeyPad_OUT,Win_Status);
-    digitalWrite(KeyPad_In,0);
-    delay(1000);
-    pinMode(KeyPad_In,INPUT);
+    digitalWrite(Crack_End,1);
+    digitalWrite(Crack_Score,Win_Status);
   }
   else if(digitalRead(Bond_In) == 1){
     delay(2000);
     myDFPlayer.play(codenum);
     delay(6000);
-    
-}
+  }
 }
 
 // Taking care of some special events.
