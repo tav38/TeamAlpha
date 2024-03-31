@@ -67,6 +67,7 @@ void loop(){
     codenum =random(2,7);
     pinMode(KeyPad_In,OUTPUT);
     digitalWrite(KeyPad_In,1);
+    digitalWrite(KeyPad_Out,1);
     Game_Status = 1;
     int num = 0;
     delay(2000);
