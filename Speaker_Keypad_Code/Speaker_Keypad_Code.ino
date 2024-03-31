@@ -53,7 +53,7 @@ void setup(){
 pinMode(Crack_End,OUTPUT);
 pinMode(Crack_Start,INPUT);
 pinMode(Crack_Score,OUTPUT);
-pinMode(Bond_In,INPUT);
+pinMode(Bond_Play,INPUT);
 keypad.addEventListener(keypadEvent);
 mySoftwareSerial.begin(9600);
 myDFPlayer.begin(mySoftwareSerial);
@@ -85,7 +85,7 @@ void loop(){
     digitalWrite(Crack_End,1);
     digitalWrite(Crack_Score,Win_Status);
   }
-  else if(digitalRead(Bond_In) == 1){
+  else if(digitalRead(Bond_Play) == 1){
     delay(2000);
     myDFPlayer.play(codenum);
     delay(6000);
