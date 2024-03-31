@@ -92,6 +92,7 @@ void loop(){
     delay(6000);
     
 }
+}
 
 // Taking care of some special events.
 void keypadEvent(KeypadEvent key){
