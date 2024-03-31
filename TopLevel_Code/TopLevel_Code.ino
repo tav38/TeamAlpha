@@ -5,9 +5,10 @@
 
 #define Rotary_A A2
 #define Rotary_B A3
-#define MainGame_Out 10
-#define MainGame_In 11
-#define Bond_Out 8
+#define Start_Crack 10
+#define End_Crack 11
+#define Score_Crack 12
+#define Bond_Play 8
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -33,10 +34,11 @@ void setup() {
   pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 5000;
-  pinMode(Bond_Out, OUTPUT);
-  pinMode(MainGame_In, INPUT);
- 
-  //pin code we will add later
+  pinMode(Bond_Play, OUTPUT);
+  pinMode(Crack_Start,OUTPUT);
+  pinMode(Crack_End, INPUT);
+  pinMode(Crack_Score, INPUT);
+
 }
 void loop() {
   //buttonState = digitalRead(buttonPin);
@@ -46,9 +48,9 @@ void loop() {
     // put your main code here, to run repeatedly:
     lcd.clear();
     lcd.print("Lets RobIT!");
-    digitalWrite(Bond_Out,1);
+    digitalWrite(Bond_Play,1);
     delay(1000);
-    digitalWrite(Bond_Out,0);
+    digitalWrite(Bond_Play,0);
     static int rot_pos = 0;
     
   
@@ -125,15 +127,13 @@ void loop() {
     }      
     else if(action == 2){
     lcd.clear();
-    lcd.print("You are here");  
-    pinMode(MainGame_Out,OUTPUT);
-    digitalWrite(MainGame_Out,1);
-    delay(500);
-    pinMode(MainGame_Out,INPUT);
-      while(digitalRead(MainGame_Out) == 1 ){
+    lcd.print("Crack the Code");  
+    digitalWrite(Crack_Start,1);
+    delay(1000);
+    while(digitalRead(Crack_End) == 0 ){
         int i = 0;                  
     }        
-    Round_Sucess = digitalRead(MainGame_In);
+    Round_Sucess = digitalRead(Crack_Score);
 
     if(Round_Sucess == 0){
         lcd.clear();
