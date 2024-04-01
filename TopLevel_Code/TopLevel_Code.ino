@@ -36,8 +36,8 @@ void setup() {
   game_delay = 5000;
   pinMode(Bond_Play, OUTPUT);
   pinMode(Crack_Start,OUTPUT);
-  pinMode(Crack_End, INPUT);
-  pinMode(Crack_Score, INPUT);
+  pinMode(Crack_End, INPUT_PULLUP);
+  pinMode(Crack_Score, INPUT_PULLUP);
 
 }
 void loop() {
