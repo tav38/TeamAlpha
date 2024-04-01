@@ -5,9 +5,8 @@ void setup() {
 void loop() {
   while(1){
     if (Serial.available() > 0) {
-        receivedChar = Serial.read();
-        Serial.print(recievedChar)
-        break;
+      String teststr = Serial.readString();  //read until timeout
+      teststr.trim();  
     }
     }
 
