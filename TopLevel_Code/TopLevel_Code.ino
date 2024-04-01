@@ -52,7 +52,7 @@ void loop() {
     
 
     while(Round_Sucess == 1 & curround < num2win){
-    action = int(random(0,2)); //changed to not include 3rd input
+    action = int(random(0,3)); //changed to not include 3rd input
     //make delay between actions smaller every time
     //in ms
     delay(game_delay);
@@ -122,7 +122,7 @@ void loop() {
         }  
       
     }
-    /*
+    
     else if(action == 2){
     lcd.clear();
     lcd.print("Crack the Code");  
@@ -145,7 +145,7 @@ void loop() {
       lcd.print("Safe Opened!");
       delay(game_delay);
       }
-    }*/
+    }
   
   game_delay = game_delay - 50;
   curround++;
