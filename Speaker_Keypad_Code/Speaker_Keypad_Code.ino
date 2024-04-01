@@ -49,7 +49,7 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 void setup(){
 pinMode(Crack_End,OUTPUT);
-pinMode(Crack_Start,INPUT);
+pinMode(Crack_Start,INPUT_PULLUP);
 pinMode(Crack_Score,OUTPUT);
 //pinMode(Bond_Play,INPUT);
 //keypad.addEventListener(keypadEvent);
