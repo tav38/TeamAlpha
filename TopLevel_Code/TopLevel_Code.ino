@@ -41,11 +41,8 @@ void setup() {
 
 }
 void loop() {
-  //buttonState = digitalRead(buttonPin);
-  // Check if the button is pressed
-  //while(buttonState == HIGH) {
     Round_Sucess = 1;
-    // put your main code here, to run repeatedly:
+    game_delay = 5000;
     lcd.clear();
     lcd.print("Lets RobIT!");
     digitalWrite(Bond_Play,1);
@@ -53,9 +50,9 @@ void loop() {
     digitalWrite(Bond_Play,0);
     static int rot_pos = 0;
     
-  
+
     while(Round_Sucess == 1 & curround < num2win){
-    action = int(random(0,3));
+    action = int(random(0,2)); //changed to not include 3rd input
     //make delay between actions smaller every time
     //in ms
     delay(game_delay);
@@ -124,7 +121,8 @@ void loop() {
         delay(game_delay);
         }  
       
-    }      
+    }
+    /*
     else if(action == 2){
     lcd.clear();
     lcd.print("Crack the Code");  
@@ -147,7 +145,7 @@ void loop() {
       lcd.print("Safe Opened!");
       delay(game_delay);
       }
-    }
+    }*/
   
   game_delay = game_delay - 50;
   curround++;
