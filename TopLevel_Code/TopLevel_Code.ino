@@ -44,7 +44,7 @@ void loop() {
     lcd.clear();
     lcd.print("Lets RobIT!");   
     static int rot_pos = 0;
-    digitalWrite(Crack_Start,LOW);    
+    digitalWrite(Crack_Start,0);    
     while(Round_Sucess == 1 & curround < num2win){
     action = int(random(0,3)); //changed to not include 3rd input
     //make delay between actions smaller every time
@@ -120,10 +120,10 @@ void loop() {
     else if(action == 2){
     lcd.clear();
     lcd.print("Crack the Code");  
-    digitalWrite(Crack_Start,HIGH);
+    digitalWrite(Crack_Start,1);
     delay(500);
-    digitalWrite(Crack_Start,LOW);
-    while(digitalRead(Crack_End) == LOW ){
+    digitalWrite(Crack_Start,0);
+    while(digitalRead(Crack_End) == 0 ){
         int i = 0;                  
     }        
     Round_Sucess = digitalRead(Crack_Score);
