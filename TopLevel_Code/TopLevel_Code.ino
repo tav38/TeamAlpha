@@ -43,6 +43,7 @@ void loop() {
     game_delay = 5000;
     lcd.clear();
     lcd.print("Lets RobIT!");   
+    curround = 0;
     static int rot_pos = 0;
     digitalWrite(Crack_Start,0);    
     while(Round_Sucess == 1 & curround < num2win){
