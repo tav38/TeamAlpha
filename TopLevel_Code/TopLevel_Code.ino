@@ -8,7 +8,6 @@
 #define Crack_Start 10
 #define Crack_End 11
 #define Crack_Score 12
-#define Bond_Play 8
 
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -34,7 +33,6 @@ void setup() {
   pinMode(buttonPin, INPUT);
   //pins for 
   game_delay = 5000;
-  pinMode(Bond_Play, OUTPUT);
   pinMode(Crack_Start,OUTPUT);
   pinMode(Crack_End, INPUT_PULLUP);
   pinMode(Crack_Score, INPUT_PULLUP);
@@ -44,13 +42,9 @@ void loop() {
     Round_Sucess = 1;
     game_delay = 5000;
     lcd.clear();
-    lcd.print("Lets RobIT!");
-    digitalWrite(Bond_Play,1);
-    delay(1000);
-    digitalWrite(Bond_Play,0);
+    lcd.print("Lets RobIT!");   
     static int rot_pos = 0;
-    
-
+    digitalWrite(Crack_Start,LOW);    
     while(Round_Sucess == 1 & curround < num2win){
     action = int(random(0,3)); //changed to not include 3rd input
     //make delay between actions smaller every time
@@ -126,10 +120,10 @@ void loop() {
     else if(action == 2){
     lcd.clear();
     lcd.print("Crack the Code");  
-    digitalWrite(Crack_Start,1);
-    delay(1000);
-    digitalWrite(Crack_Start,0);
-    while(digitalRead(Crack_End) == 0 ){
+    digitalWrite(Crack_Start,HIGH);
+    delay(500);
+    digitalWrite(Crack_Start,LOW);
+    while(digitalRead(Crack_End) == LOW ){
         int i = 0;                  
     }        
     Round_Sucess = digitalRead(Crack_Score);
